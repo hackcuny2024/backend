@@ -5,7 +5,6 @@ from config import HOST, PORT
 
 
 async def run_server():
-    print(HOST, PORT)
     await run_api(HOST, PORT)
 
 
