@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from pydantic import BaseModel, Field
 
 from config import USERNAME_MAX_LENGTH, CLASSNAME_MAX_LENGTH
@@ -25,4 +27,5 @@ class CreateClassSchema(BaseModel):
 
 
 class JoinClassSchema(BaseModel):
-    username: str = Field(max_length=USERNAME_MAX_LENGTH)
+    class_id: UUID
+    name: str = Field(max_length=USERNAME_MAX_LENGTH)

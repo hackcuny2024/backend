@@ -1,9 +1,10 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from sqlalchemy import select
 
 from database.session import SessionScope
 from database.tables.classes import Class
+from database.tables.classmates import Classmate
 from schemas.classes import CreateClassSchema, ClassSchema
 
 
@@ -11,9 +12,17 @@ class ClassService:
 
     @staticmethod
     async def create_class(schema: CreateClassSchema) -> ClassSchema:
-        new_class = Class(**schema.model_dump())
+        new_class = Class(
+            **schema.model_dump(),
+            id=uuid4()
+        )
+        the_first_classmate = Classmate(
+            class_id=new_class.id,
+            name=schema.admin_username
+        )
         async with SessionScope.get_session() as session:
             session.add(new_class)
+            session.add(the_first_classmate)
             await session.commit()
             return ClassSchema.model_validate(new_class)
 

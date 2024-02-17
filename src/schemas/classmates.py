@@ -1,5 +1,8 @@
+from uuid import UUID
+
 from .common import IdentifiableSchema, TimestampedSchema
 
 
 class ClassmateSchema(IdentifiableSchema, TimestampedSchema):
-    pass
+    class_id: UUID
+    name: str
