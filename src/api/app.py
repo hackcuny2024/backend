@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .routes import router as api_router
 
 
-app = FastAPI()
+app = FastAPI(title="AcademiX API")
 
 app.add_middleware(
     CORSMiddleware,

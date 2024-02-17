@@ -1,0 +1,2 @@
+from .identifiable import IdentifiableAbstractTable
+from .timestamped import TimestampedAbstractTable
