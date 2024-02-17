@@ -3,7 +3,7 @@ from uuid import UUID
 from pydantic import Field
 
 from config import USERNAME_MAX_LENGTH
-from schemas.common import IdentifiableSchema, TimestampedSchema
+from .common import IdentifiableSchema, TimestampedSchema
 
 
 class MessageSchema(IdentifiableSchema, TimestampedSchema):

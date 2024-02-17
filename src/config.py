@@ -16,4 +16,5 @@ DB_URL = f"postgres://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABASE}"
 HOST = os.getenv("HOST", "localhost")
 PORT = int(os.getenv("PORT", 8000))
 
+CLASSNAME_MAX_LENGTH = 100
 USERNAME_MAX_LENGTH = 100
