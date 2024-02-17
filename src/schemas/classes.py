@@ -7,6 +7,7 @@ from .common import IdentifiableSchema, TimestampedSchema
 class ClassSchema(IdentifiableSchema, TimestampedSchema):
     name: str
     info: str | None = Field(None)
+    admin_username: str
 
     sunday: str | None = Field(None)
     monday: str | None = Field(None)
@@ -20,7 +21,7 @@ class ClassSchema(IdentifiableSchema, TimestampedSchema):
 class CreateClassSchema(BaseModel):
     name: str = Field(max_length=CLASSNAME_MAX_LENGTH)
     info: str | None = Field(None)
-    username: str = Field(max_length=USERNAME_MAX_LENGTH)
+    admin_username: str = Field(max_length=USERNAME_MAX_LENGTH)
 
 
 class JoinClassSchema(BaseModel):
