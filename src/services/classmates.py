@@ -27,3 +27,12 @@ class ClassmatesService:
                     select(Classmate).where(Classmate.class_id == class_id)
                 )
             ]
+
+    @staticmethod
+    async def get_classmate(classmate_id: UUID) -> ClassmateSchema | None:
+        async with SessionScope.get_session() as session:
+            fetched_classmate = await session.scalar(
+                select(Classmate).where(Classmate.id == classmate_id)
+            )
+            if fetched_classmate:
+                return ClassmateSchema.model_validate(fetched_classmate)
