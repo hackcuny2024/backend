@@ -1,6 +1,8 @@
 from sqlalchemy import URL
 from sqlalchemy.ext.asyncio import async_sessionmaker
 
+from . import tables
+
 from database.base import Base
 from database.engine import create_async_engine, init_tables
 from database.session import SessionScope as __SessionScope
