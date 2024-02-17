@@ -4,6 +4,7 @@ from fastapi import APIRouter, status
 from sqlalchemy.exc import IntegrityError
 
 from api.exceptions import NotFoundException, BadRequestException
+from api.schemas import JoinClassResponseSchema
 from schemas.classes import ClassSchema, CreateClassSchema, JoinClassSchema
 from services.classes import ClassService
 from services.classmates import ClassmatesService
@@ -33,7 +34,7 @@ async def get_class(class_id: UUID):
 
 @router.post(
     "/join",
-    response_model=ClassSchema
+    response_model=JoinClassResponseSchema
 )
 async def join_class(body: JoinClassSchema):
     fetched_class = await ClassService.get_class(body.class_id)
@@ -41,8 +42,11 @@ async def join_class(body: JoinClassSchema):
         raise NotFoundException("Class not found.")
 
     try:
-        await ClassmatesService.join_class(body)
+        classmate = await ClassmatesService.join_class(body)
     except IntegrityError:
         raise BadRequestException("Classmate with the username specified already exists in the class.")
 
-    return fetched_class
+    return JoinClassResponseSchema(
+        new_class=fetched_class,
+        joined_as=classmate
+    )
