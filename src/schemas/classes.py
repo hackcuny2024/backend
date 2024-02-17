@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 
+from config import USERNAME_MAX_LENGTH
 from .common import IdentifiableSchema, TimestampedSchema
 
 
@@ -17,4 +18,4 @@ class ClassSchema(IdentifiableSchema, TimestampedSchema):
 
 
 class JoinClassSchema(BaseModel):
-    username: str = Field(max_length=100)
+    username: str = Field(max_length=USERNAME_MAX_LENGTH)
