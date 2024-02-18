@@ -26,7 +26,7 @@ class MessagesService:
         ).join(
             Classmate,
             Message.sender_id == Classmate.id
-        ).order_by(desc(Message.created_at))
+        )
 
         async with SessionScope.get_session() as session:
             return [
