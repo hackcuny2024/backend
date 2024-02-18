@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import select, desc
+from sqlalchemy import select, desc, asc
 
 from database.session import SessionScope
 from database.tables.classmates import Classmate
@@ -26,7 +26,7 @@ class MessagesService:
         ).join(
             Classmate,
             Message.sender_id == Classmate.id
-        )
+        ).order_by(asc(Message.created_at))
 
         async with SessionScope.get_session() as session:
             return [
